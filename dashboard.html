@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DHT Sensor Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        padding: 2rem;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .container {
+        max-width: 800px;
+      }
+
+      .dashboard-title {
+        color: #2c3e50;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .dashboard-subtitle {
+        color: #7f8c8d;
+        font-weight: 300;
+        margin-bottom: 2rem;
+      }
+
+      .card {
+        border-radius: 15px;
+        border: none;
+        margin: 1.5rem auto;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-header {
+        background: none;
+        padding: 1.5rem 1.5rem 0.5rem;
+        border: none;
+      }
+
+      .card-body {
+        padding: 1.5rem;
+      }
+
+      .card-title {
+        font-weight: 600;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: #2c3e50;
+      }
+
+      .value-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem 0;
+      }
+
+      .icon {
+        font-size: 2rem;
+        margin-right: 1rem;
+      }
+
+      .temp-icon {
+        color: #e74c3c;
+      }
+
+      .humidity-icon {
+        color: #3498db;
+      }
+
+      .value {
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .unit {
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: #7f8c8d;
+        margin-left: 0.5rem;
+      }
+
+      .temp-value {
+        color: #e74c3c;
+      }
+
+      .humidity-value {
+        color: #3498db;
+      }
+
+      .updated-time {
+        font-size: 0.8rem;
+        color: #95a5a6;
+        margin-top: 1rem;
+      }
+
+      .card-temperature {
+        background: linear-gradient(to right, #ffffff, #fff8f8);
+      }
+
+      .card-humidity {
+        background: linear-gradient(to right, #ffffff, #f8faff);
+      }
+
+      @media (min-width: 768px) {
+        .cards-container {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .card {
+          width: 48%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center dashboard-title">Dashboard Sensor IoT</h1>
+      <p class="text-center dashboard-subtitle">
+        Monitoring suhu dan kelembaban secara real-time
+      </p>
+
+      <div class="cards-container">
+        <div class="card card-temperature">
+          <div class="card-header">
+            <h3 class="card-title">Suhu</h3>
+            <small>Monitoring suhu ruangan</small>
+          </div>
+          <div class="card-body">
+            <div class="value-container">
+              <div class="icon temp-icon">
+                <i class="fas fa-temperature-high"></i>
+              </div>
+              <div class="value temp-value" id="temperature">--</div>
+              <div class="unit">°C</div>
+            </div>
+            <div class="updated-time" id="temp-updated">Memuat data...</div>
+          </div>
+        </div>
+
+        <div class="card card-humidity">
+          <div class="card-header">
+            <h3 class="card-title">Kelembaban</h3>
+            <small>Persentase kelembaban udara di ruangan</small>
+          </div>
+          <div class="card-body">
+            <div class="value-container">
+              <div class="icon humidity-icon">
+                <i class="fas fa-tint"></i>
+              </div>
+              <div class="value humidity-value" id="humidity">--</div>
+              <div class="unit">%</div>
+            </div>
+            <div class="updated-time" id="humidity-updated">Memuat data...</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <p class="text-muted">
+          <small>Data diperbarui setiap 15 detik dari ThingSpeak API</small>
+        </p>
+      </div>
+    </div>
+
+    <script>
+      function formatDateTime(date) {
+        const options = {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        };
+        return date.toLocaleDateString("id-ID", options);
+      }
+
+      const fetchData = () => {
+        fetch(
+          "https://api.thingspeak.com/channels/2947976/feeds.json?api_key=6X93358FXDY8GU5K&results=2"
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            const feeds = data.feeds;
+            const latest = feeds[feeds.length - 1];
+
+            // Data values
+            const temperature = parseInt(latest.field1);
+            const humidity = parseInt(latest.field2);
+
+            // Update time
+            const updatedTime = new Date(latest.created_at);
+            const formattedTime = formatDateTime(updatedTime);
+
+            // Error handling
+            if (isNaN(temperature) || temperature == null) {
+              document.getElementById("temperature").textContent = "N/A";
+            } else {
+              document.getElementById("temperature").textContent = temperature;
+            }
+
+            if (isNaN(humidity) || humidity == null) {
+              document.getElementById("humidity").textContent = "N/A";
+            } else {
+              document.getElementById("humidity").textContent = humidity;
+            }
+
+            // Update timestamps
+            document.getElementById(
+              "temp-updated"
+            ).textContent = `Pembaruan terakhir: ${formattedTime}`;
+            document.getElementById(
+              "humidity-updated"
+            ).textContent = `Pembaruan terakhir: ${formattedTime}`;
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+            document.getElementById("temperature").textContent = "Error";
+            document.getElementById("humidity").textContent = "Error";
+            document.getElementById("temp-updated").textContent =
+              "Gagal memuat data";
+            document.getElementById("humidity-updated").textContent =
+              "Gagal memuat data";
+          });
+      };
+
+      // Initial data fetch
+      fetchData();
+
+      // Refresh data every 15 seconds
+      setInterval(fetchData, 15000);
+    </script>
+  </body>
+</html>
