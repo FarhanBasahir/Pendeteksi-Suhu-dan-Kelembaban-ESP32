@@ -10,109 +10,107 @@
       rel="stylesheet"
     />
     <!-- Font Awesome for icons -->
-    <link 
-      rel="stylesheet" 
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <!-- Google Fonts -->
-    <link 
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" 
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <!-- Chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
       :root {
-        --primary-color: #3498db;
-        --secondary-color: #2ecc71;
+        --primary-color: #2980b9;
+        --secondary-color: #27ae60;
         --accent-color: #f39c12;
         --danger-color: #e74c3c;
         --dark-color: #2c3e50;
-        --light-color: #ecf0f1;
-        --grey-color: #95a5a6;
+        --light-color: #f8f9fa;
+        --text-color: #343a40;
+        --text-secondary: #6c757d;
+        --border-color: #dee2e6;
+        --card-bg: #ffffff;
+        --grey-color: #adb5bd;
       }
-      
+
       body {
-        background: linear-gradient(135deg, #1a2a3a 0%, #2c3e50 100%);
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         min-height: 100vh;
         padding: 2rem 1rem;
-        font-family: 'Poppins', sans-serif;
-        color: #fff;
+        font-family: "Poppins", sans-serif;
+        color: var(--text-color);
       }
-      
+
       .container {
         max-width: 1200px;
       }
-      
+
       .dashboard-header {
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--card-bg);
         border-radius: 15px;
         padding: 1.5rem;
         margin-bottom: 2rem;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
       }
-      
+
       .dashboard-title {
-        color: #ffffff;
+        color: var(--dark-color);
         font-weight: 700;
         margin-bottom: 0.5rem;
-        font-family: 'Montserrat', sans-serif;
-        text-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+        font-family: "Montserrat", sans-serif;
+        text-shadow: none;
       }
-      
+
       .dashboard-subtitle {
-        color: rgba(255, 255, 255, 0.7);
+        color: var(--text-secondary);
         font-weight: 300;
         margin-bottom: 0;
       }
-      
-      .cards-container {
-        margin-bottom: 2rem;
-      }
-      
+
       .card {
         border-radius: 15px;
-        border: none;
+        border: 1px solid var(--border-color);
         margin: 1rem 0;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         overflow: hidden;
         transition: all 0.3s ease;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: var(--card-bg);
         height: 100%;
       }
-      
+
       .card:hover {
         transform: translateY(-5px);
         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
       }
-      
+
       .card-header {
-        background: rgba(255, 255, 255, 0.03);
+        background: rgba(0, 0, 0, 0.02);
         padding: 1.5rem 1.5rem 0.5rem;
-        border: none;
+        border-bottom: 1px solid var(--border-color);
       }
-      
+
       .card-body {
         padding: 1.5rem;
         position: relative;
       }
-      
+
       .card-title {
         font-weight: 600;
         font-size: 1.2rem;
         margin-bottom: 0.5rem;
-        color: #ffffff;
+        color: var(--dark-color);
         display: flex;
         align-items: center;
       }
-      
+
       .card-title i {
         margin-right: 10px;
       }
-      
+
       .gauge-container {
         position: relative;
         width: 200px;
@@ -120,12 +118,12 @@
         margin: 0 auto;
         margin-bottom: 1rem;
       }
-      
+
       .gauge {
         width: 100%;
         height: 100%;
       }
-      
+
       .gauge-center {
         position: absolute;
         top: 50%;
@@ -133,51 +131,51 @@
         transform: translate(-50%, -50%);
         text-align: center;
       }
-      
+
       .value-container {
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 1rem 0;
       }
-      
+
       .icon {
         font-size: 2.5rem;
         margin-right: 1rem;
       }
-      
+
       .temp-icon {
         color: var(--danger-color);
       }
-      
+
       .humidity-icon {
         color: var(--primary-color);
       }
-      
+
       .value {
         font-size: 3.5rem;
         font-weight: 700;
         line-height: 1;
-        font-family: 'Montserrat', sans-serif;
+        font-family: "Montserrat", sans-serif;
       }
-      
+
       .unit {
         font-size: 1.2rem;
         font-weight: 400;
         color: rgba(255, 255, 255, 0.7);
         margin-left: 0.5rem;
       }
-      
+
       .temp-value {
         color: var(--danger-color);
         text-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
       }
-      
+
       .humidity-value {
         color: var(--primary-color);
         text-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
       }
-      
+
       .status-badge {
         position: absolute;
         top: 1rem;
@@ -187,57 +185,56 @@
         font-size: 0.8rem;
         font-weight: 500;
       }
-      
+
       .status-badge.normal {
         background-color: var(--secondary-color);
         color: white;
       }
-      
+
       .status-badge.warning {
         background-color: var(--accent-color);
         color: white;
       }
-      
+
       .status-badge.danger {
         background-color: var(--danger-color);
         color: white;
       }
-      
+
       .updated-time {
         font-size: 0.8rem;
         color: rgba(255, 255, 255, 0.5);
         margin-top: 1rem;
         text-align: center;
       }
-      
+
       .chart-container {
         position: relative;
         height: 300px;
         margin-top: 2rem;
         margin-bottom: 1rem;
       }
-      
+
       .chart-card {
         padding: 1.5rem;
       }
-      
+
       .chart-title {
         font-size: 1.2rem;
         font-weight: 600;
-        margin-bottom: 1rem;
-        color: #ffffff;
+        color: var(--dark-color);
       }
-      
+
       .time-filter {
         display: flex;
         justify-content: center;
         margin-bottom: 1rem;
       }
-      
+
       .time-filter button {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: rgba(255, 255, 255, 0.7);
+        background: rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
         font-size: 0.8rem;
         padding: 0.3rem 0.8rem;
         margin: 0 0.2rem;
@@ -245,28 +242,29 @@
         cursor: pointer;
         transition: all 0.2s;
       }
-      
+
       .time-filter button:hover,
       .time-filter button.active {
-        background: rgba(255, 255, 255, 0.2);
+        background: var(--primary-color);
         color: white;
+        border-color: var(--primary-color);
       }
-      
+
       .summary-panel {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
         border-radius: 15px;
         padding: 1.5rem;
         margin-top: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
       }
-      
+
       .summary-title {
         font-size: 1.2rem;
         font-weight: 600;
         margin-bottom: 1rem;
       }
-      
+
       .summary-item {
         display: flex;
         justify-content: space-between;
@@ -274,37 +272,38 @@
         padding-bottom: 0.5rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       }
-      
+
       .summary-item:last-child {
         border-bottom: none;
         margin-bottom: 0;
         padding-bottom: 0;
       }
-      
+
       .summary-label {
-        color: rgba(255, 255, 255, 0.7);
+        color: var(--text-secondary);
       }
-      
+
       .summary-value {
         font-weight: 500;
+        color: var(--dark-color);
       }
-      
+
       .footer {
         margin-top: 2rem;
         padding: 1rem 0;
         font-size: 0.8rem;
-        color: rgba(255, 255, 255, 0.5);
+        color: var(--text-secondary);
         text-align: center;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid var(--border-color);
       }
-      
+
       .loading {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100px;
       }
-      
+
       .loading-spinner {
         width: 40px;
         height: 40px;
@@ -313,24 +312,24 @@
         border-top: 4px solid #fff;
         animation: spin 1s linear infinite;
       }
-      
+
       .gauge-value {
         font-size: 2.5rem;
         font-weight: 700;
         line-height: 1;
       }
-      
+
       .gauge-unit {
         font-size: 1rem;
         color: rgba(255, 255, 255, 0.7);
       }
-      
+
       .gauge-label {
         font-size: 0.9rem;
         color: rgba(255, 255, 255, 0.7);
         margin-top: 0.3rem;
       }
-      
+
       .animated-background {
         position: fixed;
         top: 0;
@@ -338,23 +337,32 @@
         width: 100%;
         height: 100%;
         z-index: -1;
-        opacity: 0.3;
+        opacity: 0.1;
       }
-      
+
       .dot {
         position: absolute;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+        background: radial-gradient(
+          circle,
+          rgba(0, 123, 255, 0.3) 0%,
+          rgba(0, 123, 255, 0) 70%
+        );
         animation: float 8s infinite ease-in-out;
       }
-      
+
       @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
-      
+
       @keyframes float {
-        0%, 100% {
+        0%,
+        100% {
           transform: translateY(0) translateX(0);
         }
         25% {
@@ -367,22 +375,22 @@
           transform: translateY(10px) translateX(-10px);
         }
       }
-      
+
       @media (min-width: 768px) {
         body {
           padding: 2rem;
         }
-        
+
         .main-cards {
           display: flex;
           justify-content: space-between;
         }
-        
+
         .main-card {
           width: 48%;
         }
       }
-      
+
       @media (min-width: 992px) {
         .row-cols-lg-3 > * {
           flex: 0 0 auto;
@@ -393,7 +401,7 @@
   </head>
   <body>
     <div class="animated-background" id="animated-bg"></div>
-    
+
     <div class="container">
       <div class="dashboard-header">
         <div class="row align-items-center">
@@ -401,19 +409,25 @@
             <h1 class="dashboard-title">
               <i class="fas fa-microchip"></i> Smart IoT Dashboard
             </h1>
-            <p class="dashboard-subtitle">Monitoring suhu dan kelembaban secara real-time dengan sistem IoT</p>
+            <p class="dashboard-subtitle">
+              Monitoring suhu dan kelembaban secara real-time dengan sistem IoT
+            </p>
           </div>
           <div class="col-md-4 text-md-end mt-3 mt-md-0">
             <div class="d-flex justify-content-md-end align-items-center">
               <div class="me-3">
                 <div class="d-flex align-items-center">
-                  <div class="spinner-grow spinner-grow-sm text-success me-2" role="status" id="connection-indicator">
+                  <div
+                    class="spinner-grow spinner-grow-sm text-success me-2"
+                    role="status"
+                    id="connection-indicator"
+                  >
                     <span class="visually-hidden">Loading...</span>
                   </div>
                   <span id="connection-status">Terhubung</span>
                 </div>
               </div>
-              <button class="btn btn-sm btn-outline-light" id="refresh-btn">
+              <button class="btn btn-sm btn-outline-dark" id="refresh-btn">
                 <i class="fas fa-sync-alt"></i> Refresh
               </button>
             </div>
@@ -428,7 +442,9 @@
               <h3 class="card-title">
                 <i class="fas fa-temperature-high temp-icon"></i> Suhu
               </h3>
-              <small class="text-light opacity-75">Monitoring suhu ruangan dalam derajat Celcius</small>
+              <small class="text-dark opacity-75"
+                >Monitoring suhu ruangan dalam derajat Celcius</small
+              >
             </div>
             <div class="card-body">
               <div class="status-badge" id="temp-status">Memuat...</div>
@@ -436,69 +452,64 @@
                 <canvas id="temp-gauge" class="gauge"></canvas>
                 <div class="gauge-center">
                   <div class="gauge-value" id="temperature">--</div>
-                  <div class="gauge-unit">°C</div>
-                  <div class="gauge-label">Suhu</div>
                 </div>
               </div>
-              
+
               <div class="value-container">
                 <div class="icon temp-icon">
                   <i class="fas fa-thermometer-half"></i>
                 </div>
                 <div class="value temp-value" id="temperature-big">--</div>
-                <div class="unit">°C</div>
+                <div class="unit text-dark opacity-75">°C</div>
               </div>
-              <div class="updated-time" id="temp-updated">Memuat data...</div>
+              <div class="updated-time text-dark opacity-75" id="temp-updated">Memuat data...</div>
             </div>
           </div>
         </div>
-        
+
         <div class="col-md-6 main-card">
           <div class="card card-humidity">
             <div class="card-header">
               <h3 class="card-title">
                 <i class="fas fa-tint humidity-icon"></i> Kelembaban
               </h3>
-              <small class="text-light opacity-75">Persentase kelembaban udara di ruangan</small>
+              <small class="text-dark opacity-75"
+                >Persentase kelembaban udara di ruangan</small
+              >
             </div>
             <div class="card-body">
-              <div class="status-badge" id="humidity-status">Memuat...</div>
+              <div class="status-badge text-dark opacity-75" id="humidity-status">Memuat...</div>
               <div class="gauge-container">
                 <canvas id="humidity-gauge" class="gauge"></canvas>
                 <div class="gauge-center">
                   <div class="gauge-value" id="humidity">--</div>
-                  <div class="gauge-unit">%</div>
-                  <div class="gauge-label">Kelembaban</div>
                 </div>
               </div>
-              
+
               <div class="value-container">
                 <div class="icon humidity-icon">
                   <i class="fas fa-tint"></i>
                 </div>
                 <div class="value humidity-value" id="humidity-big">--</div>
-                <div class="unit">%</div>
+                <div class="unit text-dark opacity-75">%</div>
               </div>
-              <div class="updated-time" id="humidity-updated">Memuat data...</div>
+              <div class="updated-time text-dark opacity-75" id="humidity-updated">
+                Memuat data...
+              </div>
             </div>
           </div>
         </div>
       </div>
-      
+
       <div class="card chart-card">
         <div class="chart-title">
           <i class="fas fa-chart-line me-2"></i> Grafik Data Sensor
-        </div>
-        <div class="time-filter">
-          <button class="active" data-time="1h">1 Jam</button>
-          <button data-time="6h">6 Jam</button>
-          <button data-time="24h">24 Jam</button>
         </div>
         <div class="chart-container">
           <canvas id="sensorChart"></canvas>
         </div>
       </div>
-      
+
       <div class="row mt-4">
         <div class="col-md-4 mb-3">
           <div class="card">
@@ -527,7 +538,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="col-md-4 mb-3">
           <div class="card">
             <div class="card-header">
@@ -555,7 +566,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="col-md-4 mb-3">
           <div class="card">
             <div class="card-header">
@@ -584,7 +595,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="footer">
         <div class="row">
           <div class="col-md-6 text-center text-md-start">
@@ -600,114 +611,121 @@
     <script>
       // Create animated background
       function createAnimatedBackground() {
-        const bg = document.getElementById('animated-bg');
+        const bg = document.getElementById("animated-bg");
         const dotCount = 15;
-        
+
         for (let i = 0; i < dotCount; i++) {
-          const dot = document.createElement('div');
-          dot.className = 'dot';
-          
+          const dot = document.createElement("div");
+          dot.className = "dot";
+
           // Random size
           const size = Math.random() * 100 + 50;
           dot.style.width = `${size}px`;
           dot.style.height = `${size}px`;
-          
+
           // Random position
           const posX = Math.random() * 100;
           const posY = Math.random() * 100;
           dot.style.left = `${posX}%`;
           dot.style.top = `${posY}%`;
-          
+
           // Random delay
           dot.style.animationDelay = `${Math.random() * 5}s`;
-          
+
           bg.appendChild(dot);
         }
       }
-      
+
       // Initialize gauge charts
       function initGauges() {
         // Temperature Gauge
-        const tempGauge = new Chart(document.getElementById('temp-gauge'), {
-          type: 'doughnut',
+        const tempGauge = new Chart(document.getElementById("temp-gauge"), {
+          type: "doughnut",
           data: {
-            datasets: [{
-              data: [0, 100],
-              backgroundColor: [
-                'rgba(231, 76, 60, 0.8)',
-                'rgba(255, 255, 255, 0.1)'
-              ],
-              borderWidth: 0
-            }]
+            datasets: [
+              {
+                data: [0, 100],
+                backgroundColor: [
+                  "rgba(231, 76, 60, 0.8)",
+                  "rgba(255, 255, 255, 0.1)",
+                ],
+                borderWidth: 0,
+              },
+            ],
           },
           options: {
             circumference: 180,
             rotation: 270,
-            cutout: '75%',
+            cutout: "75%",
             plugins: {
               tooltip: { enabled: false },
-              legend: { display: false }
+              legend: { display: false },
             },
-            events: []
-          }
+            events: [],
+          },
         });
-        
+
         // Humidity Gauge
-        const humidityGauge = new Chart(document.getElementById('humidity-gauge'), {
-          type: 'doughnut',
-          data: {
-            datasets: [{
-              data: [0, 100],
-              backgroundColor: [
-                'rgba(52, 152, 219, 0.8)',
-                'rgba(255, 255, 255, 0.1)'
+        const humidityGauge = new Chart(
+          document.getElementById("humidity-gauge"),
+          {
+            type: "doughnut",
+            data: {
+              datasets: [
+                {
+                  data: [0, 100],
+                  backgroundColor: [
+                    "rgba(52, 152, 219, 0.8)",
+                    "rgba(255, 255, 255, 0.1)",
+                  ],
+                  borderWidth: 0,
+                },
               ],
-              borderWidth: 0
-            }]
-          },
-          options: {
-            circumference: 180,
-            rotation: 270,
-            cutout: '75%',
-            plugins: {
-              tooltip: { enabled: false },
-              legend: { display: false }
             },
-            events: []
+            options: {
+              circumference: 180,
+              rotation: 270,
+              cutout: "75%",
+              plugins: {
+                tooltip: { enabled: false },
+                legend: { display: false },
+              },
+              events: [],
+            },
           }
-        });
-        
+        );
+
         return { tempGauge, humidityGauge };
       }
-      
+
       // Initialize line chart
       function initChart() {
-        const ctx = document.getElementById('sensorChart').getContext('2d');
-        
+        const ctx = document.getElementById("sensorChart").getContext("2d");
+
         const sensorChart = new Chart(ctx, {
-          type: 'line',
+          type: "line",
           data: {
             labels: [],
             datasets: [
               {
-                label: 'Suhu (°C)',
+                label: "Suhu (°C)",
                 data: [],
-                borderColor: 'rgba(231, 76, 60, 0.8)',
-                backgroundColor: 'rgba(231, 76, 60, 0.2)',
+                borderColor: "rgba(231, 76, 60, 0.8)",
+                backgroundColor: "rgba(231, 76, 60, 0.2)",
                 borderWidth: 2,
                 tension: 0.3,
-                fill: true
+                fill: true,
               },
               {
-                label: 'Kelembaban (%)',
+                label: "Kelembaban (%)",
                 data: [],
-                borderColor: 'rgba(52, 152, 219, 0.8)',
-                backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                borderColor: "rgba(52, 152, 219, 0.8)",
+                backgroundColor: "rgba(52, 152, 219, 0.2)",
                 borderWidth: 2,
                 tension: 0.3,
-                fill: true
-              }
-            ]
+                fill: true,
+              },
+            ],
           },
           options: {
             responsive: true,
@@ -715,101 +733,108 @@
             scales: {
               x: {
                 grid: {
-                  color: 'rgba(255, 255, 255, 0.1)'
+                  color: "rgba(0, 0, 0, 0.1)",
                 },
                 ticks: {
-                  color: 'rgba(255, 255, 255, 0.7)'
-                }
+                  color: "rgba(0, 0, 0, 0.6)",
+                },
               },
               y: {
                 grid: {
-                  color: 'rgba(255, 255, 255, 0.1)'
+                  color: "rgba(0, 0, 0, 0.1)",
                 },
                 ticks: {
-                  color: 'rgba(255, 255, 255, 0.7)'
-                }
-              }
+                  color: "rgba(0, 0, 0, 0.6)",
+                },
+              },
             },
             plugins: {
               legend: {
                 labels: {
-                  color: 'rgba(255, 255, 255, 0.7)'
-                }
-              }
+                  color: "rgba(0, 0, 0, 0.7)",
+                },
+              },
             },
             interaction: {
               intersect: false,
-              mode: 'index'
-            }
-          }
+              mode: "index",
+            },
+          },
         });
-        
+
         return sensorChart;
       }
-      
+
       // Update gauge value
       function updateGauge(gauge, value, maxValue = 100) {
         gauge.data.datasets[0].data = [value, maxValue - value];
         gauge.update();
       }
-      
+
       // Format time for chart
       function formatTimeForChart(date) {
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const hours = date.getHours().toString().padStart(2, "0");
+        const minutes = date.getMinutes().toString().padStart(2, "0");
         return `${hours}:${minutes}`;
       }
-      
+
       // Get temperature status
       function getTempStatus(temp) {
-        if (temp < 18) return { status: 'Dingin', class: 'warning' };
-        if (temp > 30) return { status: 'Panas', class: 'danger' };
-        return { status: 'Normal', class: 'normal' };
+        if (temp < 18) return { status: "Dingin", class: "warning" };
+        if (temp > 30) return { status: "Panas", class: "danger" };
+        return { status: "Normal", class: "normal" };
       }
-      
+
       // Get humidity status
       function getHumidityStatus(humidity) {
-        if (humidity < 30) return { status: 'Kering', class: 'warning' };
-        if (humidity > 70) return { status: 'Lembab', class: 'danger' };
-        return { status: 'Normal', class: 'normal' };
+        if (humidity < 30) return { status: "Kering", class: "warning" };
+        if (humidity > 70) return { status: "Lembab", class: "danger" };
+        return { status: "Normal", class: "normal" };
       }
-      
+
       // Initialize app
-      document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener("DOMContentLoaded", function () {
         createAnimatedBackground();
-        
+
         const { tempGauge, humidityGauge } = initGauges();
         const sensorChart = initChart();
-        
+
         let chartData = {
           times: [],
           temperatures: [],
-          humidities: []
+          humidities: [],
         };
-        
+
         // Time filter buttons
-        const timeButtons = document.querySelectorAll('.time-filter button');
-        timeButtons.forEach(button => {
-          button.addEventListener('click', function() {
-            timeButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
+        const timeButtons = document.querySelectorAll(".time-filter button");
+        timeButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            timeButtons.forEach((btn) => btn.classList.remove("active"));
+            this.classList.add("active");
+
             // Add logic to filter chart data based on selected time
             // For demo purposes, we're just keeping all data
           });
         });
-        
+
         // Refresh button
-        document.getElementById('refresh-btn').addEventListener('click', function() {
-          fetchData();
-        });
-        
+        document
+          .getElementById("refresh-btn")
+          .addEventListener("click", function () {
+            fetchData();
+          });
+
         const fetchData = () => {
           // Show connection indicator
-          document.getElementById('connection-indicator').classList.remove('text-success');
-          document.getElementById('connection-indicator').classList.add('text-warning');
-          document.getElementById('connection-status').textContent = 'Menghubungkan...';
-          
+          document
+            .getElementById("connection-indicator")
+            .classList.remove("text-success");
+          document
+            .getElementById("connection-indicator")
+            .classList.add("text-warning");
+          document.getElementById("connection-status").textContent =
+            "Menghubungkan...";
+
           fetch(
             "https://api.thingspeak.com/channels/2947976/feeds.json?api_key=6X93358FXDY8GU5K&results=20"
           )
@@ -817,25 +842,33 @@
             .then((data) => {
               const feeds = data.feeds;
               const latest = feeds[feeds.length - 1];
-              
+
               // Update connection status
-              document.getElementById('connection-indicator').classList.remove('text-warning');
-              document.getElementById('connection-indicator').classList.add('text-success');
-              document.getElementById('connection-status').textContent = 'Terhubung';
-              document.getElementById('connection-value').textContent = 'Terhubung';
-              
+              document
+                .getElementById("connection-indicator")
+                .classList.remove("text-warning");
+              document
+                .getElementById("connection-indicator")
+                .classList.add("text-success");
+              document.getElementById("connection-status").textContent =
+                "Terhubung";
+              document.getElementById("connection-value").textContent =
+                "Terhubung";
+
               // Data values for latest reading
               const temperature = parseInt(latest.field1);
               const humidity = parseInt(latest.field2);
-              
+
               // Update time
               const updatedTime = new Date(latest.created_at);
               const formattedTime = formatDateTime(updatedTime);
-              
+
               // Update data count
-              document.getElementById('data-count').textContent = feeds.length;
-              document.getElementById('last-update').textContent = formattedTime.split(',')[1].trim();
-              
+              document.getElementById("data-count").textContent = feeds.length;
+              document.getElementById("last-update").textContent = formattedTime
+                .split(",")[1]
+                .trim();
+
               // Process historical data for charts and stats
               let tempSum = 0;
               let humiditySum = 0;
@@ -843,87 +876,107 @@
               let tempMax = -100;
               let humidityMin = 100;
               let humidityMax = 0;
-              
+
               // Clear chart data
               chartData.times = [];
               chartData.temperatures = [];
               chartData.humidities = [];
-              
+
               // Process all feeds for chart data
-              feeds.forEach(feed => {
+              feeds.forEach((feed) => {
                 const feedTemp = parseInt(feed.field1);
                 const feedHumidity = parseInt(feed.field2);
                 const feedTime = new Date(feed.created_at);
-                
+
                 if (!isNaN(feedTemp)) {
                   tempSum += feedTemp;
                   tempMin = Math.min(tempMin, feedTemp);
                   tempMax = Math.max(tempMax, feedTemp);
                   chartData.temperatures.push(feedTemp);
                 }
-                
+
                 if (!isNaN(feedHumidity)) {
                   humiditySum += feedHumidity;
                   humidityMin = Math.min(humidityMin, feedHumidity);
                   humidityMax = Math.max(humidityMax, feedHumidity);
                   chartData.humidities.push(feedHumidity);
                 }
-                
+
                 chartData.times.push(formatTimeForChart(feedTime));
               });
-              
+
               // Calculate averages
               const tempAvg = (tempSum / feeds.length).toFixed(1);
               const humidityAvg = (humiditySum / feeds.length).toFixed(1);
-              
+
               // Update statistics
-              document.getElementById('temp-min').textContent = `${tempMin} °C`;
-              document.getElementById('temp-max').textContent = `${tempMax} °C`;
-              document.getElementById('temp-avg').textContent = `${tempAvg} °C`;
-              
-              document.getElementById('humidity-min').textContent = `${humidityMin} %`;
-              document.getElementById('humidity-max').textContent = `${humidityMax} %`;
-              document.getElementById('humidity-avg').textContent = `${humidityAvg} %`;
-              
+              document.getElementById("temp-min").textContent = `${tempMin} °C`;
+              document.getElementById("temp-max").textContent = `${tempMax} °C`;
+              document.getElementById("temp-avg").textContent = `${tempAvg} °C`;
+
+              document.getElementById(
+                "humidity-min"
+              ).textContent = `${humidityMin} %`;
+              document.getElementById(
+                "humidity-max"
+              ).textContent = `${humidityMax} %`;
+              document.getElementById(
+                "humidity-avg"
+              ).textContent = `${humidityAvg} %`;
+
               // Error handling for main display
               if (isNaN(temperature) || temperature == null) {
                 document.getElementById("temperature").textContent = "N/A";
                 document.getElementById("temperature-big").textContent = "N/A";
               } else {
-                document.getElementById("temperature").textContent = temperature;
-                document.getElementById("temperature-big").textContent = temperature;
-                
+                document.getElementById("temperature").textContent =
+                  temperature;
+                document.getElementById("temperature-big").textContent =
+                  temperature;
+
                 // Update temperature gauge
                 updateGauge(tempGauge, temperature, 50); // Max temp assumed to be 50
-                
+
                 // Set temperature status
                 const tempStatusObj = getTempStatus(temperature);
-                document.getElementById('temp-status').textContent = tempStatusObj.status;
-                document.getElementById('temp-status').className = `status-badge ${tempStatusObj.class}`;
-                document.getElementById('temp-condition').textContent = tempStatusObj.status;
+                document.getElementById("temp-status").textContent =
+                  tempStatusObj.status;
+                document.getElementById(
+                  "temp-status"
+                ).className = `status-badge ${tempStatusObj.class}`;
+                document.getElementById("temp-condition").textContent =
+                  tempStatusObj.status;
               }
-              
+
               if (isNaN(humidity) || humidity == null) {
                 document.getElementById("humidity").textContent = "N/A";
                 document.getElementById("humidity-big").textContent = "N/A";
               } else {
                 document.getElementById("humidity").textContent = humidity;
                 document.getElementById("humidity-big").textContent = humidity;
-                
+
                 // Update humidity gauge
                 updateGauge(humidityGauge, humidity);
-                
+
                 // Set humidity status
                 const humidityStatusObj = getHumidityStatus(humidity);
-                document.getElementById('humidity-status').textContent = humidityStatusObj.status;
-                document.getElementById('humidity-status').className = `status-badge ${humidityStatusObj.class}`;
-                document.getElementById('humidity-condition').textContent = humidityStatusObj.status;
+                document.getElementById("humidity-status").textContent =
+                  humidityStatusObj.status;
+                document.getElementById(
+                  "humidity-status"
+                ).className = `status-badge ${humidityStatusObj.class}`;
+                document.getElementById("humidity-condition").textContent =
+                  humidityStatusObj.status;
               }
-              
+
               // Update timestamps
-              document.getElementById("temp-updated").textContent = `Pembaruan terakhir: ${formattedTime}`;
-              document.getElementById("humidity-updated").textContent = `Pembaruan terakhir: ${formattedTime}`;
-              
+              document.getElementById(
+                "temp-updated"
+              ).textContent = `Pembaruan terakhir: ${formattedTime}`;
+              document.getElementById(
+                "humidity-updated"
+              ).textContent = `Pembaruan terakhir: ${formattedTime}`;
+
               // Update chart
               sensorChart.data.labels = chartData.times;
               sensorChart.data.datasets[0].data = chartData.temperatures;
@@ -932,35 +985,45 @@
             })
             .catch((error) => {
               console.error("Error fetching data:", error);
-              
+
               // Update connection status
-              document.getElementById('connection-indicator').classList.remove('text-success');
-              document.getElementById('connection-indicator').classList.remove('text-warning');
-              document.getElementById('connection-indicator').classList.add('text-danger');
-              document.getElementById('connection-status').textContent = 'Terputus';
-              document.getElementById('connection-value').textContent = 'Terputus';
-              
+              document
+                .getElementById("connection-indicator")
+                .classList.remove("text-success");
+              document
+                .getElementById("connection-indicator")
+                .classList.remove("text-warning");
+              document
+                .getElementById("connection-indicator")
+                .classList.add("text-danger");
+              document.getElementById("connection-status").textContent =
+                "Terputus";
+              document.getElementById("connection-value").textContent =
+                "Terputus";
+
               // Update error messages
               document.getElementById("temperature").textContent = "Error";
               document.getElementById("humidity").textContent = "Error";
               document.getElementById("temperature-big").textContent = "Error";
               document.getElementById("humidity-big").textContent = "Error";
-              document.getElementById("temp-updated").textContent = "Gagal memuat data";
-              document.getElementById("humidity-updated").textContent = "Gagal memuat data";
+              document.getElementById("temp-updated").textContent =
+                "Gagal memuat data";
+              document.getElementById("humidity-updated").textContent =
+                "Gagal memuat data";
             });
         };
-        
+
         // Format date time helper
         function formatDateTime(date) {
-          const options = { 
-            day: 'numeric', 
-            month: 'short', 
-            year: 'numeric', 
-            hour: '2-digit', 
-            minute: '2-digit', 
-            second: '2-digit' 
+          const options = {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
           };
-          return date.toLocaleDateString('id-ID', options);
+          return date.toLocaleDateString("id-ID", options);
         }
 
         // Initial data fetch
